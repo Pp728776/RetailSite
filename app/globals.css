@@ -15,3 +15,31 @@ body { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; col
 .info-h { font-size:12px; letter-spacing:2px; text-transform:uppercase; color:#6b6b6b; margin:22px 0 6px; }
 .info-h:first-child { margin-top:0; }
 html { scroll-behavior:smooth; }
+
+/* Mobile navigation and layout refinements */
+.mobile-menu { display:none; }
+.mobile-menu-toggle { list-style:none; width:44px; height:44px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:5px; cursor:pointer; border:1px solid var(--line); }
+.mobile-menu-toggle::-webkit-details-marker { display:none; }
+.mobile-menu-toggle span { display:block; width:19px; height:2px; background:#111; transition:transform .2s, opacity .2s; }
+.mobile-menu[open] .mobile-menu-toggle span:first-child { transform:translateY(7px) rotate(45deg); }
+.mobile-menu[open] .mobile-menu-toggle span:nth-child(2) { opacity:0; }
+.mobile-menu[open] .mobile-menu-toggle span:last-child { transform:translateY(-7px) rotate(-45deg); }
+.mobile-menu-panel { position:absolute; z-index:30; top:100%; left:0; width:min(86vw, 360px); height:calc(100dvh - 64px); overflow-y:auto; background:#fff; border-right:1px solid var(--line); box-shadow:12px 16px 24px rgb(0 0 0 / .12); padding:12px 20px 20px; }
+.mobile-menu-links { display:flex; flex-direction:column; }
+.mobile-menu-links a { padding:15px 4px; border-bottom:1px solid var(--line); font-size:14px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+.mobile-menu-links a.active { color:var(--accent); }
+.mobile-menu-cta { width:100%; justify-content:center; margin-top:16px; }
+
+@media (max-width: 767px) {
+  .wrap { padding-left:16px; padding-right:16px; }
+  .mobile-menu { display:block; }
+  .nav-inner { gap:10px; }
+  .nav-inner > a:first-child { font-size:21px; }
+  .nav-whatsapp { padding:9px 11px !important; font-size:10px; letter-spacing:.5px; }
+  .mobile-menu-toggle { width:40px; height:40px; }
+  .hero-mobile { min-height:480px; height:76svh; }
+  .row { margin-right:-16px; padding-right:16px; }
+  .product-photo { height:clamp(220px, 66vw, 320px) !important; }
+  section.py-16 { padding-top:2.75rem; padding-bottom:2.75rem; }
+  section.py-10 { padding-top:2rem; padding-bottom:2rem; }
+}

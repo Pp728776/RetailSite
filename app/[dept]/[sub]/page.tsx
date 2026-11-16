@@ -8,21 +8,25 @@ import SectionHead from "@/components/SectionHead";
 import { departments } from "@/content/departments";
 import { products } from "@/content/products";
 import { waLink } from "@/components/WhatsApp";
+import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
   return departments.flatMap(d => d.subcategories.map(s => ({ dept: d.slug, sub: s.slug })));
 }
+export const dynamicParams = false;
 export async function generateMetadata({ params }: { params: Promise<{ dept: string; sub: string }> }) {
   const { dept, sub } = await params;
-  const d = departments.find(x => x.slug === dept)!;
-  const s = d.subcategories.find(x => x.slug === sub)!;
+  const d = departments.find(x => x.slug === dept);
+  const s = d?.subcategories.find(x => x.slug === sub);
+  if (!d || !s) notFound();
   return { title: `${s.name} for ${d.name}` };
 }
 
 export default async function SubPage({ params }: { params: Promise<{ dept: string; sub: string }> }) {
   const { dept, sub } = await params;
-  const d = departments.find(x => x.slug === dept)!;
-  const s = d.subcategories.find(x => x.slug === sub)!;
+  const d = departments.find(x => x.slug === dept);
+  const s = d?.subcategories.find(x => x.slug === sub);
+  if (!d || !s) notFound();
   const items = products.filter(p => p.department === d.slug && p.subcategory === s.slug);
   return (
     <>

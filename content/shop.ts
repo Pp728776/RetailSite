@@ -6,7 +6,7 @@
 
 export const shop = {
   // Shop name as shown in the top-left logo and the browser tab
-  name: "VASTRA",
+  name: "Chaudhary Vastralaya",
 
   // One line that appears in Google search results under the shop name
   tagline: "Clothing for the whole family in Rohini, Delhi",

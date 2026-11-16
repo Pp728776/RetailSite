@@ -13,7 +13,7 @@ import * as home from "@/content/home";
 export function Hero() {
   const h = home.hero;
   return (
-    <Photo image={h.image} pattern={h.pattern} shade={0.55} className="h-[84vh] min-h-[560px] flex items-end text-white">
+    <Photo image={h.image} pattern={h.pattern} shade={0.55} className="hero-mobile h-[84vh] min-h-[560px] flex items-end text-white">
       <header className="wrap pb-16 md:pb-[70px]">
         <div className="kick">{h.kicker}</div>
         <h1 className="text-[clamp(44px,7vw,96px)] leading-[.95] font-black tracking-[-2px] uppercase my-4">{h.headline}</h1>

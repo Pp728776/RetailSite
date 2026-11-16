@@ -6,21 +6,25 @@ import Footer from "@/components/Footer";
 import Photo from "@/components/Photo";
 import ProductCard from "@/components/ProductCard";
 import SectionHead from "@/components/SectionHead";
+import { notFound } from "next/navigation";
 import { departments } from "@/content/departments";
 import { products } from "@/content/products";
 
 export function generateStaticParams() {
   return departments.map(d => ({ dept: d.slug }));
 }
+export const dynamicParams = false;
 export async function generateMetadata({ params }: { params: Promise<{ dept: string }> }) {
   const { dept } = await params;
-  const d = departments.find(x => x.slug === dept)!;
+  const d = departments.find(x => x.slug === dept);
+  if (!d) notFound();
   return { title: d.name, description: d.tagline };
 }
 
 export default async function DepartmentPage({ params }: { params: Promise<{ dept: string }> }) {
   const { dept } = await params;
-  const d = departments.find(x => x.slug === dept)!;
+  const d = departments.find(x => x.slug === dept);
+  if (!d) notFound();
   const all = products.filter(p => p.department === d.slug);
   const trending = all.filter(p => p.trending);
   return (
